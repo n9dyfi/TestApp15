@@ -4,20 +4,21 @@ import com.nokia.meego 1.0
 Page {
     tools: commonTools
 
-    Label {
-        id: label
-        anchors.centerIn: parent
-        text: qsTr("Hello world!")
-        visible: false
+    Header {
+        id: header
+        headerText: "TestApp15"
     }
 
     Button{
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: label.bottom
-            topMargin: 10
-        }
-        text: qsTr("Click here!")
-        onClicked: label.visible = true
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: header.height/2
+        text: qsTr("Tab the page!")
+        onClicked: openTabMainRequested()
     }
+
+    Connections {
+        target: appWindow
+        onOpenTabMain: pageStack.push(Qt.resolvedUrl("TabMain.qml"),{tabNames:tabNames})
+    }
+
 }
