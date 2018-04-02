@@ -4,7 +4,15 @@ import com.nokia.meego 1.0
 PageStackWindow {
     id: appWindow
 
+    signal openTabMain(variant tabNames)
+    signal openTabMainRequested
+    signal setPageContent(int pageNumber, string pageContent)
+
     initialPage: mainPage
+
+    AppDefaults {
+        id: appDefaults
+    }
 
     MainPage {
         id: mainPage
@@ -24,7 +32,10 @@ PageStackWindow {
         id: myMenu
         visualParent: pageStack
         MenuLayout {
-            MenuItem { text: qsTr("Sample menu item") }
+            MenuItem {
+                text: qsTr("Quit")
+                onClicked: Qt.quit()
+            }
         }
     }
 }
